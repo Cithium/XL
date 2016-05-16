@@ -25,5 +25,7 @@ public class Editor extends JTextField implements ActionListener {
 		System.out.println("woww");
 		// TODO Auto-generated method stub
 		
+		sheet.editSlot("A1", this.getText());
+		
 	}
 }
