@@ -53,6 +53,7 @@ public class SlotLabel extends ColoredLabel implements Observer, MouseListener {
 		currentSlot.reset();
 		System.out.println("Mouse pressed");
 		this.setBackground(Color.YELLOW);
+		currentSlot.set(this);
 		
 	}
 
