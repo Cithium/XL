@@ -1,13 +1,15 @@
 package gui;
 
 import java.awt.Color;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.Observable;
 import java.util.Observer;
 
 import model.Sheet;
 
 
-public class SlotLabel extends ColoredLabel implements Observer/*, MouseListener*/ {
+public class SlotLabel extends ColoredLabel implements Observer, MouseListener {
 	
     private CurrentSlot currentSlot;
     private String position;
@@ -15,7 +17,7 @@ public class SlotLabel extends ColoredLabel implements Observer/*, MouseListener
     
     public SlotLabel(String position, CurrentSlot currentSlot, Sheet sheet) {
         super("                    ", Color.WHITE, RIGHT);
-      //addMouseListener(this);
+        addMouseListener(this);
         this.currentSlot = currentSlot;
         this.position = position;
         this.sheet = sheet;
@@ -24,6 +26,37 @@ public class SlotLabel extends ColoredLabel implements Observer/*, MouseListener
 
 	@Override
 	public void update(Observable o, Object arg) {
+		System.out.println("Mouse update");
+		
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		System.out.println("Mouse pressed");
+		this.setBackground(Color.YELLOW);
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		
 	}
