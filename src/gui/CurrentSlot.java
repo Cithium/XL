@@ -24,5 +24,9 @@ public class CurrentSlot extends Observable {
     public String toString(){
         return currentLabel.toString();
     }
+    
+    public SlotLabel getLabel() {
+    	return currentLabel;
+    }
 
 }
