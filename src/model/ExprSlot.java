@@ -21,4 +21,10 @@ public class ExprSlot implements Slot {
 		return expr.toString();
 	}
 
+	@Override
+	public String print(Environment env) {
+		// TODO Auto-generated method stub
+		return Double.toString(value(env));
+	}
+
 }

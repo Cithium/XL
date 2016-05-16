@@ -18,4 +18,9 @@ public class TextSlot implements Slot {
 	public String toString() {
 		return text;
 	}
+	@Override
+	public String print(Environment env) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

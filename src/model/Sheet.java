@@ -3,9 +3,10 @@ package model;
 import java.util.HashMap;
 import java.util.Observable;
 
+import expr.Environment;
 import util.XLException;
 
-public class Sheet extends Observable {
+public class Sheet extends Observable implements Environment {
 
 	private HashMap<String, Slot> sheetMap;
 	
@@ -25,7 +26,7 @@ public class Sheet extends Observable {
 		System.out.print("TEST  :: ");
 		System.out.println(text);
 		Slot testSlot = sheetMap.get(text);
-		return 22;
+		return sheetMap.get(text).value(this);
 	}
 	
 	public String print(String key) {
@@ -34,7 +35,7 @@ public class Sheet extends Observable {
 			return "";
 		}
 		try {
-			return slot.toString();
+			return slot.print(this);
 		} catch (XLException e) {
 			return "ERROR";
 		}
