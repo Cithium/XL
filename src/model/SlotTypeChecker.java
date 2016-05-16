@@ -1,5 +1,10 @@
 package model;
 
+import java.io.IOException;
+
+import expr.Expr;
+import expr.ExprParser;
+
 public class SlotTypeChecker {
 	
 	public static Slot check(String text) {
@@ -8,6 +13,15 @@ public class SlotTypeChecker {
 			return new TextSlot(comment);
 			
 		}
-		return new ExprSlot();
+		ExprParser exprParser = new ExprParser();
+		Expr newExpr;
+		try {
+			newExpr = exprParser.build(text);
+			return new ExprSlot(newExpr);
+		} catch (IOException e) {			
+			System.out.println("KUNDE INTE PARSA LOL");
+			e.printStackTrace();
+			return null;
+		}
 	}
 }

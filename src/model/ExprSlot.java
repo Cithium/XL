@@ -1,11 +1,24 @@
 package model;
 
+import expr.Environment;
+import expr.Expr;
+
 public class ExprSlot implements Slot {
 
+	private Expr expr;
+	
+	public ExprSlot(Expr expr) {
+		this.expr = expr;
+	}
+	
 	@Override
-	public double value() {
+	public double value(Environment env) {
 		// TODO Auto-generated method stub
-		return 0;
+		return expr.value(env);
+	}
+	
+	public String toString() {
+		return expr.toString();
 	}
 
 }

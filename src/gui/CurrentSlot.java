@@ -20,5 +20,9 @@ public class CurrentSlot extends Observable {
 		addObserver(slotLabel);
 		
 	}
+	
+    public String toString(){
+        return currentLabel.toString();
+    }
 
 }
