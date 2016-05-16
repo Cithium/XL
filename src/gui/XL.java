@@ -10,12 +10,14 @@ import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import model.*;
 
 public class XL extends JFrame implements Printable {
     private static final int ROWS = 10, COLUMNS = 8;
     private XLCounter counter;
-    private StatusLabel statusLabel = new StatusLabel();
+    private StatusLabel statusLabel;
     private XLList xlList;
+    private Sheet sheet; //Ny
 
     public XL(XL oldXL) {
         this(oldXL.xlList, oldXL.counter);
@@ -27,13 +29,16 @@ public class XL extends JFrame implements Printable {
         this.counter = counter;
         xlList.add(this);
         counter.increment();
-        JPanel statusPanel = new StatusPanel(statusLabel);
-        JPanel sheetPanel = new SheetPanel(ROWS, COLUMNS);
-        Editor editor = new Editor();
+        sheet = new Sheet(); // Ny
+        CurrentSlot currentSlot = new CurrentSlot(); // Ny
+        statusLabel = new StatusLabel(sheet); //Ny
+        JPanel statusPanel = new StatusPanel(statusLabel, /*Ny*/currentSlot/*Ny*/);
+        JPanel sheetPanel = new SheetPanel(ROWS, COLUMNS /*Ny*/, currentSlot, sheet /*Ny*/);
+        Editor editor = new Editor(/*Ny*/currentSlot, sheet/*Ny*/);
         add(NORTH, statusPanel);
         add(CENTER, editor);
         add(SOUTH, sheetPanel);
-        setJMenuBar(new XLMenuBar(this, xlList, statusLabel));
+        setJMenuBar(new XLMenuBar(this, xlList, statusLabel /*Ny*/sheet, currentSlot/*Ny*/));
         pack();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
