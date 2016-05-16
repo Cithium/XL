@@ -16,6 +16,7 @@ public class SlotTypeChecker {
 		ExprParser exprParser = new ExprParser();
 		Expr newExpr;
 		try {
+			System.out.println("det blev en rolig grej");
 			newExpr = exprParser.build(text);
 			return new ExprSlot(newExpr);
 		} catch (IOException e) {			
