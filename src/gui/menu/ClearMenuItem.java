@@ -4,9 +4,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JMenuItem;
 
+import gui.CurrentSlot;
+import model.Sheet;
+
 class ClearMenuItem extends JMenuItem implements ActionListener {
-    public ClearMenuItem() {
+	
+	private Sheet sheet;
+	private CurrentSlot currentSlot;
+	
+    public ClearMenuItem(Sheet sheet, CurrentSlot currentSlot) {
         super("Clear");
+        this.sheet = sheet;
+        this.currentSlot = currentSlot;
         addActionListener(this);
     }
 
