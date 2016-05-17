@@ -24,11 +24,22 @@ public class Sheet extends Observable implements Environment {
 	}
 	
 	public boolean insert(SlotLabel sl, Slot s){
+	
 		return true;
 	}
 	
 	public boolean clearSlot(SlotLabel sl, Slot s){
+		if(sheetMap.containsKey(sl)){
+			sheetMap.remove(sl);
+			
+		//error kod här? if error blabla?
+		
+		setChanged();
+		notifyObservers();
 		return true;
+		}else{
+			return false;
+		}
 	}
 	
 	public boolean clearAll(){
