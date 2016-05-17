@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Observable;
 
 import expr.Environment;
+import gui.SlotLabel;
 import util.XLException;
 
 public class Sheet extends Observable implements Environment {
@@ -17,23 +18,49 @@ public class Sheet extends Observable implements Environment {
 	public void editSlot(String key, String input) {
 		//Slot value = SlotFactory.create(text) // Hitta rätt typ av slot...
 		Slot value = SlotTypeChecker.check(input);
-		if (circularCheck(key, value)) {
-			System.out.println("CHECK FEL LOL");
-		} else {
-			sheetMap.put(key, value);
-		}
+		
+		sheetMap.put(key, value);
 	//	sheetMap.put("A1", new TextSlot("123"));
 
+	}
+	
+	public boolean insert(SlotLabel key, Slot s){
+	
+		return true;
+	}
+	
+	public boolean clearSlot(SlotLabel key, Slot s){
+		if(sheetMap.containsKey(key)){
+			sheetMap.remove(key);
+			
+		//error kod här? if error blabla?
+		
+		setChanged();
+		notifyObservers();
+		return true;
+		}else{
+			return false;
+		}
+	}
+	
+	public boolean clearAll(){
+		return false;
+		
+	}
+	
+	public boolean loadSlots(String s){
+		return true;
+	}
+	public boolean saveSlots(String s){
+		return true;
+		
 	}
 	
 	public double value(String text) {
 		System.out.print("TEST  :: ");
 		System.out.println(text);
 		Slot testSlot = sheetMap.get(text);
-	/*	if (sheetMap.get(text) == null) {
-			throw new XLException(text + " does not exist in the sheet.");
-		}
-	*/	return sheetMap.get(text).value(this);
+		return sheetMap.get(text).value(this);
 	}
 	
 	public String print(String key) {
