@@ -1,7 +1,11 @@
 package model;
 
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Observable;
+import java.util.Set;
 
 import expr.Environment;
 import gui.SlotLabel;
@@ -55,6 +59,10 @@ public class Sheet extends Observable implements Environment {
 		
 	}
 	
+	public Set<Entry<String,Slot>> getAllEntries(){
+		return sheetMap.entrySet();
+	}
+	
 	public boolean loadSlots(String s){
 		return true;
 	}
@@ -81,7 +89,25 @@ public class Sheet extends Observable implements Environment {
 			return "ERROR";
 		}
 	}
-	
+	public void loadMap(HashMap<String, Slot> map){ //behövs för loadMenuItem
+		boolean errorInEntry = false;
+		HashMap<String,Slot> temp = this.sheetMap;
+		this.sheetMap = map;
+		Iterator<Entry<String, Slot>> itr = map.entrySet().iterator();
+		
+		while(itr.hasNext()&&!errorInEntry){
+			Entry<String,Slot> entry = itr.next();
+			if(circularCheck(entry.getKey(),entry.getValue())){
+				//error meddelande här
+				this.sheetMap = temp;
+				errorInEntry=true;
+			}
+			
+		}
+		setChanged();
+		notifyObservers();
+		
+	}
 	public boolean circularCheck(String key, Slot value) {
         Slot currentSlot = sheetMap.get(key);
 
