@@ -12,10 +12,11 @@ class LoadMenuItem extends OpenMenuItem {
     }
 
     protected void action(String path) throws FileNotFoundException {
-        // TODO
+        System.out.println(path);
     }
 
     protected int openDialog(JFileChooser fileChooser) {
+    	System.out.println(1);
         return fileChooser.showOpenDialog(xl);
     }
 }
