@@ -21,7 +21,7 @@ public class Sheet extends Observable implements Environment {
 		errorMessage = "";
 	}
 	
-	public void insert(String key, String input) {
+	public void editSlot(String key, String input) {
 		//Slot value = SlotFactory.create(text) // Hitta rätt typ av slot...
 		Slot value = SlotTypeChecker.check(input);
 		if (circularCheck(key, value)) {
@@ -96,17 +96,16 @@ public class Sheet extends Observable implements Environment {
 			return "ERROR";
 		}
 	}
-	public void loadMap(HashMap<String, Slot> map){ //behövs för loadMenuItem		
+	public void loadMap(HashMap<String, Slot> map){ //behövs för loadMenuItem
 		boolean errorInEntry = false;
 		HashMap<String,Slot> temp = this.sheetMap;
-		
 		this.sheetMap = map;
 		Iterator<Entry<String, Slot>> itr = map.entrySet().iterator();
 		
 		while(itr.hasNext()&&!errorInEntry){
 			Entry<String,Slot> entry = itr.next();
 			if(circularCheck(entry.getKey(),entry.getValue())){
-				//error meddelande här
+				errorMessage = errorMessage +"Cannot load these files";
 				this.sheetMap = temp;
 				errorInEntry=true;
 			}
@@ -115,7 +114,7 @@ public class Sheet extends Observable implements Environment {
 		sheetMap = map;
 		setChanged();
 		notifyObservers();
-		
+		errorMessage="";
 
 		
 	}
