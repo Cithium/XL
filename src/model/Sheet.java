@@ -105,7 +105,7 @@ public class Sheet extends Observable implements Environment {
 		while(itr.hasNext()&&!errorInEntry){
 			Entry<String,Slot> entry = itr.next();
 			if(circularCheck(entry.getKey(),entry.getValue())){
-				errorMessage = "Cannot load these files";
+				errorMessage = errorMessage +"Cannot load these files";
 				this.sheetMap = temp;
 				errorInEntry=true;
 			}
@@ -114,7 +114,7 @@ public class Sheet extends Observable implements Environment {
 		sheetMap = map;
 		setChanged();
 		notifyObservers();
-		
+		errorMessage="";
 
 		
 	}
