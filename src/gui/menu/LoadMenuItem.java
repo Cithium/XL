@@ -3,15 +3,16 @@ package gui.menu;
 import gui.StatusLabel;
 import gui.XL;
 import model.Slot;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-
 import java.io.FileNotFoundException;
 
 import javax.swing.JFileChooser;
 
 import util.XLBufferedReader;
+import util.XLException;
 
 class LoadMenuItem extends OpenMenuItem {
 
@@ -29,6 +30,18 @@ class LoadMenuItem extends OpenMenuItem {
 		} catch (FileNotFoundException e) {
 			statusLabel.setText(e.getMessage());
 		}
+
+		try {
+			Set<Map.Entry<String, Slot>> set = xl.getAllEntries();
+			for (Map.Entry<String, Slot> entry : set) {
+				
+				map.put(entry.getKey(), entry.getValue());
+			}
+			b.load(map);
+		} catch (XLException e) {
+			statusLabel.setText("COuld not load file " + e.getMessage());
+		}
+		xl.setMap(map);
 
 	}
 

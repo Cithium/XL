@@ -11,6 +11,8 @@ import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -68,8 +70,14 @@ public class XL extends JFrame implements Printable {
         new XL(new XLList(), new XLCounter());
     }
     
-    public void loadMap(HashMap<String, Slot> map){
-    	sheet.loadMap(map);
+
+    public void setMap(Map<String, Slot> map){
+    	sheet.loadMap((HashMap<String, Slot>) map);
+    	
+    }
+    
+    public Set<Entry<String,Slot>> getAllEntries(){
+		return sheet.getAllEntries();
     	
     }
 }
