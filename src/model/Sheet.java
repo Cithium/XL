@@ -20,10 +20,9 @@ public class Sheet extends Observable implements Environment {
 		sheetMap = new HashMap<String, Slot>();
 		errorMessage = "";
 	}
-	
+
 	public void insert(String key, String input) {
 
-		//Slot value = SlotFactory.create(text) // Hitta rätt typ av slot...
 		Slot value = SlotTypeChecker.check(input);
 		if (circularCheck(key, value)) {
 			errorMessage = "ERROR";
@@ -38,53 +37,46 @@ public class Sheet extends Observable implements Environment {
 		notifyObservers();
 
 	}
-	
-	
-	public boolean clearSlot(SlotLabel key){
-		if(sheetMap.containsKey(key.toString())){
+
+	public boolean clearSlot(SlotLabel key) {
+		if (sheetMap.containsKey(key.toString())) {
 			sheetMap.remove(key.toString());
-		//error kod här? if error blabla?
-		
-		setChanged();
-		notifyObservers();
-		return true;
-		}else{
+			// error kod här? if error blabla?
+
+			setChanged();
+			notifyObservers();
+			return true;
+		} else {
 			return false;
 		}
 	}
-	
-	public void clearAll(){
+
+	public void clearAll() {
 		sheetMap = new HashMap<String, Slot>();
 		errorMessage = "";
 		setChanged();
 		notifyObservers();
-		
+
 	}
 	
 	public Set<Entry<String,Slot>> getAllEntries(){
+
 		return sheetMap.entrySet();
 	}
-	
-	public boolean loadSlots(String s){
-		return true;
-	}
-	public boolean saveSlots(String s){
-		return true;
-		
-	}
-	
+
 	public String getError() {
 		return errorMessage;
 	}
-	
+
 	public double value(String text) {
 
 		if (sheetMap.get(text) == null) {
 			throw new XLException("There is nothing in slot " + text);
 		}
+
 		return sheetMap.get(text).value(this);
 	}
-	
+
 	public String print(String key) {
 		Slot slot = sheetMap.get(key);
 		if (slot == null) {
@@ -97,32 +89,33 @@ public class Sheet extends Observable implements Environment {
 			return "ERROR";
 		}
 	}
-	public void loadMap(HashMap<String, Slot> map){ //behövs för loadMenuItem
+
+	public void loadMap(HashMap<String, Slot> map) { // behövs för loadMenuItem
 		boolean errorInEntry = false;
-		HashMap<String,Slot> temp = this.sheetMap;
+		HashMap<String, Slot> temp = this.sheetMap;
 		this.sheetMap = map;
 		Iterator<Entry<String, Slot>> itr = map.entrySet().iterator();
-		
-		while(itr.hasNext()&&!errorInEntry){
-			Entry<String,Slot> entry = itr.next();
-			if(circularCheck(entry.getKey(),entry.getValue())){
-				errorMessage = errorMessage +"Cannot load these files";
+
+		while (itr.hasNext() && !errorInEntry) {
+			Entry<String, Slot> entry = itr.next();
+			if (circularCheck(entry.getKey(), entry.getValue())) {
+				errorMessage = errorMessage + "Cannot load these files";
 				this.sheetMap = temp;
-				errorInEntry=true;
+				errorInEntry = true;
 			}
-			
+
 		}
 		sheetMap = map;
 		setChanged();
 		notifyObservers();
-		errorMessage="";
+		errorMessage = "";
 
-		
 	}
-	public boolean circularCheck(String key, Slot value) {
-        Slot currentSlot = sheetMap.get(key);
 
-        sheetMap.put(key, new TestSlot());
+	public boolean circularCheck(String key, Slot value) {
+		Slot currentSlot = sheetMap.get(key);
+
+		sheetMap.put(key, new TestSlot());
 
         try {
             value.value(this);
@@ -134,7 +127,7 @@ public class Sheet extends Observable implements Environment {
             return true;
         }
 
-        sheetMap.put(key, currentSlot);
-        return false;
+		sheetMap.put(key, currentSlot);
+		return false;
 	}
 }
