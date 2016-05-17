@@ -21,7 +21,7 @@ public class Sheet extends Observable implements Environment {
 		errorMessage = "";
 	}
 	
-	public void editSlot(String key, String input) {
+	public void insert(String key, String input) {
 		//Slot value = SlotFactory.create(text) // Hitta rätt typ av slot...
 		Slot value = SlotTypeChecker.check(input);
 		if (circularCheck(key, value)) {
