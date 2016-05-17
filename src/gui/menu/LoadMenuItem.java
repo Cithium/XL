@@ -22,11 +22,10 @@ class LoadMenuItem extends OpenMenuItem {
 
 	protected void action(String path) throws FileNotFoundException {
 		XLBufferedReader b = null;
-		Map<String, Slot> map = new HashMap<String, Slot>();
+		HashMap<String, Slot> map = new HashMap<String, Slot>();
 
 		try {
 			b = new XLBufferedReader(path);
-			System.out.println("wow");
 		} catch (FileNotFoundException e) {
 			statusLabel.setText(e.getMessage());
 		}
@@ -34,7 +33,6 @@ class LoadMenuItem extends OpenMenuItem {
 		try {
 			Set<Map.Entry<String, Slot>> set = xl.getAllEntries();
 			for (Map.Entry<String, Slot> entry : set) {
-				
 				map.put(entry.getKey(), entry.getValue());
 			}
 			b.load(map);

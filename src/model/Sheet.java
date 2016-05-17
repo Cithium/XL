@@ -67,6 +67,8 @@ public class Sheet extends Observable implements Environment {
 	}
 	
 	public Set<Entry<String,Slot>> getAllEntries(){
+		Set<Entry<String,Slot>> set = sheetMap.entrySet();
+		System.out.println("Sheet/Set: " + set);
 		return sheetMap.entrySet();
 	}
 	
@@ -84,8 +86,7 @@ public class Sheet extends Observable implements Environment {
 	}
 	
 	public double value(String text) {
-		System.out.print("TEST  :: ");
-		System.out.println(text);
+
 		
 		if (sheetMap.get(text) == null) {
 			throw new XLException(text + " ger något fel");
@@ -107,7 +108,7 @@ public class Sheet extends Observable implements Environment {
 		}
 	}
 	public void loadMap(HashMap<String, Slot> map){ //behövs för loadMenuItem
-		boolean errorInEntry = false;
+	/*	boolean errorInEntry = false;
 		HashMap<String,Slot> temp = this.sheetMap;
 		this.sheetMap = map;
 		Iterator<Entry<String, Slot>> itr = map.entrySet().iterator();
@@ -120,9 +121,12 @@ public class Sheet extends Observable implements Environment {
 				errorInEntry=true;
 			}
 			
-		}
+		}*/
+		sheetMap = map;
 		setChanged();
 		notifyObservers();
+		
+
 		
 	}
 	public boolean circularCheck(String key, Slot value) {
@@ -146,9 +150,5 @@ public class Sheet extends Observable implements Environment {
 
         sheetMap.put(key, currentSlot);
         return false;
-	}
-	
-	public void loadMap(HashMap<String, Slot> map) {
-		sheetMap = map;
 	}
 }
