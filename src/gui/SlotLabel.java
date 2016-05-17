@@ -26,12 +26,11 @@ public class SlotLabel extends ColoredLabel implements Observer, MouseListener {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		System.out.println("Mouse update");
 		String text = sheet.print(position);
 		this.setText(text);
 		
 	//	System.out.println(sheet.value(position));
-	//	currentSlot.deleteObserver(this);
+		currentSlot.deleteObserver(this);
 		
 	}
 
@@ -56,7 +55,6 @@ public class SlotLabel extends ColoredLabel implements Observer, MouseListener {
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		currentSlot.reset();
-		System.out.println("Mouse pressed");
 		this.setBackground(Color.YELLOW);
 		currentSlot.set(this);
 		

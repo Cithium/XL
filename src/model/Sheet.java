@@ -10,20 +10,25 @@ import util.XLException;
 public class Sheet extends Observable implements Environment {
 
 	private HashMap<String, Slot> sheetMap;
+	String errorMessage;
 	
 	public Sheet() {
 		sheetMap = new HashMap<String, Slot>();
+		errorMessage = "";
 	}
 	
 	public void editSlot(String key, String input) {
 		//Slot value = SlotFactory.create(text) // Hitta rätt typ av slot...
 		Slot value = SlotTypeChecker.check(input);
 		if (circularCheck(key, value)) {
-			setChanged();
-			notifyObservers();
+			errorMessage = "ERROR";
+
 		} else {
 			sheetMap.put(key, value);
+			errorMessage = "";			
 		}
+		setChanged();
+		notifyObservers();
 
 	//	sheetMap.put("A1", new TextSlot("123"));
 
@@ -34,10 +39,11 @@ public class Sheet extends Observable implements Environment {
 		return true;
 	}
 	
-	public boolean clearSlot(SlotLabel key, Slot s){
-		if(sheetMap.containsKey(key)){
-			sheetMap.remove(key);
-			
+	public boolean clearSlot(SlotLabel key){
+		System.out.println("if contains: " + key.toString());
+		if(sheetMap.containsKey(key.toString())){
+			sheetMap.remove(key.toString());
+			System.out.println("WOW LOL");
 		//error kod här? if error blabla?
 		
 		setChanged();
@@ -50,6 +56,7 @@ public class Sheet extends Observable implements Environment {
 	
 	public void clearAll(){
 		sheetMap = new HashMap<String, Slot>();
+		errorMessage = "";
 		setChanged();
 		notifyObservers();
 		
@@ -63,10 +70,19 @@ public class Sheet extends Observable implements Environment {
 		
 	}
 	
+	public String getError() {
+		System.out.println("Sheet/getError: " + errorMessage);
+		return errorMessage;
+	}
+	
 	public double value(String text) {
 		System.out.print("TEST  :: ");
 		System.out.println(text);
-		Slot testSlot = sheetMap.get(text);
+		
+		if (sheetMap.get(text) == null) {
+			throw new XLException(text + " ger något fel");
+		}
+		
 		return sheetMap.get(text).value(this);
 	}
 	
@@ -78,6 +94,7 @@ public class Sheet extends Observable implements Environment {
 		try {
 			return slot.print(this);
 		} catch (XLException e) {
+			errorMessage = "ERROR2";
 			return "ERROR";
 		}
 	}
@@ -105,4 +122,7 @@ public class Sheet extends Observable implements Environment {
         return false;
 	}
 	
+	public void loadMap(HashMap<String, Slot> map) {
+		sheetMap = map;
+	}
 }

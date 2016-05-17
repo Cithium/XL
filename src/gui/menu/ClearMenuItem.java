@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JMenuItem;
 
 import gui.CurrentSlot;
+import gui.SlotLabel;
 import model.Sheet;
 
 class ClearMenuItem extends JMenuItem implements ActionListener {
@@ -20,6 +21,8 @@ class ClearMenuItem extends JMenuItem implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        // TODO
+    	System.out.println("wowowo1");
+    	SlotLabel slot = currentSlot.getLabel();
+        sheet.clearSlot(slot);
     }
 }

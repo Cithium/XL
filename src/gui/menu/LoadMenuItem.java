@@ -25,6 +25,7 @@ class LoadMenuItem extends OpenMenuItem {
 
 		try {
 			b = new XLBufferedReader(path);
+			System.out.println("wow");
 		} catch (FileNotFoundException e) {
 			statusLabel.setText(e.getMessage());
 		}

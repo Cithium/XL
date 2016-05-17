@@ -9,6 +9,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.JFrame;
@@ -67,8 +68,8 @@ public class XL extends JFrame implements Printable {
         new XL(new XLList(), new XLCounter());
     }
     
-    public void loadMap(Map<String, Slot> map){
-    	sheet.
+    public void loadMap(HashMap<String, Slot> map){
+    	sheet.loadMap(map);
     	
     }
 }
