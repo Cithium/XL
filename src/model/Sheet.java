@@ -23,14 +23,14 @@ public class Sheet extends Observable implements Environment {
 	//	sheetMap.put("A1", new TextSlot("123"));
 	}
 	
-	public boolean insert(SlotLabel sl, Slot s){
+	public boolean insert(SlotLabel key, Slot s){
 	
 		return true;
 	}
 	
-	public boolean clearSlot(SlotLabel sl, Slot s){
-		if(sheetMap.containsKey(sl)){
-			sheetMap.remove(sl);
+	public boolean clearSlot(SlotLabel key, Slot s){
+		if(sheetMap.containsKey(key)){
+			sheetMap.remove(key);
 			
 		//error kod här? if error blabla?
 		
