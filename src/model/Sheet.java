@@ -97,7 +97,7 @@ public class Sheet extends Observable implements Environment {
 		}
 	}
 	public void loadMap(HashMap<String, Slot> map){ //behövs för loadMenuItem
-	/*	boolean errorInEntry = false;
+		boolean errorInEntry = false;
 		HashMap<String,Slot> temp = this.sheetMap;
 		this.sheetMap = map;
 		Iterator<Entry<String, Slot>> itr = map.entrySet().iterator();
@@ -110,7 +110,7 @@ public class Sheet extends Observable implements Environment {
 				errorInEntry=true;
 			}
 			
-		}*/
+		}
 		sheetMap = map;
 		setChanged();
 		notifyObservers();
