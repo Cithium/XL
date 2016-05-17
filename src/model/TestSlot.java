@@ -11,13 +11,11 @@ public class TestSlot implements Slot {
 
 	@Override
 	public double value(Environment env) {
-		System.out.println("Circulargrej");
 		throw new XLException("Circular depend");
 	}
 
 	@Override
 	public String print(Environment env) {
-		System.out.println("Wow inget att skriva ut");
 		throw new XLException("wowww, inget att skriva ut");
 	}
 

@@ -25,7 +25,7 @@ public class Sheet extends Observable implements Environment {
 		//Slot value = SlotFactory.create(text) // Hitta rätt typ av slot...
 		Slot value = SlotTypeChecker.check(input);
 		if (circularCheck(key, value)) {
-			errorMessage = "ERROR";
+			errorMessage += " at position " + key;
 
 		} else {
 			sheetMap.put(key, value);
@@ -33,17 +33,12 @@ public class Sheet extends Observable implements Environment {
 		}
 		setChanged();
 		notifyObservers();
-
-	//	sheetMap.put("A1", new TextSlot("123"));
-
 	}
 	
 	
 	public boolean clearSlot(SlotLabel key){
-		System.out.println("if contains: " + key.toString());
 		if(sheetMap.containsKey(key.toString())){
 			sheetMap.remove(key.toString());
-			System.out.println("WOW LOL");
 		//error kod här? if error blabla?
 		
 		setChanged();
@@ -64,7 +59,6 @@ public class Sheet extends Observable implements Environment {
 	
 	public Set<Entry<String,Slot>> getAllEntries(){
 		Set<Entry<String,Slot>> set = sheetMap.entrySet();
-		System.out.println("Sheet/Set: " + set);
 		return sheetMap.entrySet();
 	}
 	
@@ -77,7 +71,6 @@ public class Sheet extends Observable implements Environment {
 	}
 	
 	public String getError() {
-		System.out.println("Sheet/getError: " + errorMessage);
 		return errorMessage;
 	}
 	
@@ -99,7 +92,7 @@ public class Sheet extends Observable implements Environment {
 		try {
 			return slot.print(this);
 		} catch (XLException e) {
-			errorMessage = "ERROR2";
+			if (errorMessage == "") errorMessage = "ERROR: Circular Dependency";
 			return "ERROR";
 		}
 	}
@@ -133,13 +126,11 @@ public class Sheet extends Observable implements Environment {
         try {
             value.value(this);
         } catch (XLException e) {
-        	System.out.println("Bad input 1");
     		setChanged();
     		notifyObservers();
             //currentError = "Bad input, ";
             return true;
         } catch (NullPointerException e) {
-        	System.out.println("Bad input 2");
             //currentError = "Bad input, ";
             return true;
         }
