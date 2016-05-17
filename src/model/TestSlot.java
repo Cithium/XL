@@ -11,12 +11,12 @@ public class TestSlot implements Slot {
 
 	@Override
 	public double value(Environment env) {
-		throw new XLException("Circular depend");
+		throw new XLException("Circular dependency detected");
 	}
 
 	@Override
 	public String print(Environment env) {
-		throw new XLException("wowww, inget att skriva ut");
+		throw new XLException("Circular dependency detected");
 	}
 
 }

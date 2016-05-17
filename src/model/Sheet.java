@@ -14,7 +14,7 @@ import util.XLException;
 public class Sheet extends Observable implements Environment {
 
 	private HashMap<String, Slot> sheetMap;
-	String errorMessage;
+	private String errorMessage;
 	
 	public Sheet() {
 		sheetMap = new HashMap<String, Slot>();
@@ -22,6 +22,7 @@ public class Sheet extends Observable implements Environment {
 	}
 	
 	public void insert(String key, String input) {
+
 		//Slot value = SlotFactory.create(text) // Hitta rätt typ av slot...
 		Slot value = SlotTypeChecker.check(input);
 		if (circularCheck(key, value)) {
@@ -30,9 +31,12 @@ public class Sheet extends Observable implements Environment {
 		} else {
 			sheetMap.put(key, value);
 			errorMessage = "";			
+
 		}
+
 		setChanged();
 		notifyObservers();
+
 	}
 	
 	
@@ -58,7 +62,6 @@ public class Sheet extends Observable implements Environment {
 	}
 	
 	public Set<Entry<String,Slot>> getAllEntries(){
-		Set<Entry<String,Slot>> set = sheetMap.entrySet();
 		return sheetMap.entrySet();
 	}
 	
@@ -76,11 +79,9 @@ public class Sheet extends Observable implements Environment {
 	
 	public double value(String text) {
 
-		
 		if (sheetMap.get(text) == null) {
-			throw new XLException(text + " ger något fel");
+			throw new XLException("There is nothing in slot " + text);
 		}
-		
 		return sheetMap.get(text).value(this);
 	}
 	
@@ -128,10 +129,8 @@ public class Sheet extends Observable implements Environment {
         } catch (XLException e) {
     		setChanged();
     		notifyObservers();
-            //currentError = "Bad input, ";
             return true;
         } catch (NullPointerException e) {
-            //currentError = "Bad input, ";
             return true;
         }
 
