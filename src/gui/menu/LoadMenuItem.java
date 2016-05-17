@@ -37,7 +37,7 @@ class LoadMenuItem extends OpenMenuItem {
 			}
 			b.load(map);
 		} catch (XLException e) {
-			statusLabel.setText("COuld not load file " + e.getMessage());
+			statusLabel.setText("Could not load file " + e.getMessage());
 		}
 		xl.setMap(map);
 
