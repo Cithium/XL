@@ -21,7 +21,6 @@ class ClearMenuItem extends JMenuItem implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-    	System.out.println("wowowo1");
     	SlotLabel slot = currentSlot.getLabel();
         sheet.clearSlot(slot);
     }

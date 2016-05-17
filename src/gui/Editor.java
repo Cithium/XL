@@ -22,11 +22,10 @@ public class Editor extends JTextField implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		System.out.println("woww");
 		// TODO Auto-generated method stub
-		System.out.println(currentSlot.toString() + " :: " + this.getText());
 		sheet.insert(currentSlot.toString(), this.getText());
 		this.setText("");
 		currentSlot.set(currentSlot.getLabel());
+
 	}
 }

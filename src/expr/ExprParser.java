@@ -52,14 +52,12 @@ public class ExprParser {
 	 *                if the reader input violates the grammar.
 	 */
 	public Expr build(Reader reader) throws IOException {
-		System.out.println("aids");
 		tokenizer = new StreamTokenizer(reader);
 		tokenizer.ordinaryChar('-');
 		tokenizer.ordinaryChar('/');
 		token = tokenizer.nextToken();
 		Expr e = expr();
 		if (token == StreamTokenizer.TT_EOF) {
-			System.out.println(e);
 			return e;
 		} else {
 			throw new XLException("trailing garbage");

@@ -44,7 +44,6 @@ class LoadMenuItem extends OpenMenuItem {
 	}
 
 	protected int openDialog(JFileChooser fileChooser) {
-		System.out.println(1);
 		return fileChooser.showOpenDialog(xl);
 	}
 }

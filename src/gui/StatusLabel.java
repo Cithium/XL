@@ -16,7 +16,6 @@ public class StatusLabel extends ColoredLabel implements Observer {
     }
 
     public void update(Observable observable, Object object) {
-    	System.out.println("StatusLabel/update");
         setText(sheet.getError());
     }
 }
