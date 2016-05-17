@@ -23,6 +23,7 @@ public class Sheet extends Observable implements Environment {
 			sheetMap.put(key, value);
 		}
 	//	sheetMap.put("A1", new TextSlot("123"));
+
 	}
 	
 	public double value(String text) {
@@ -56,6 +57,8 @@ public class Sheet extends Observable implements Environment {
             value.value(this);
         } catch (XLException e) {
         	System.out.println("Bad input 1");
+    		setChanged();
+    		notifyObservers();
             //currentError = "Bad input, ";
             return true;
         } catch (NullPointerException e) {

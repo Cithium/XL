@@ -16,6 +16,7 @@ public class StatusLabel extends ColoredLabel implements Observer {
     }
 
     public void update(Observable observable, Object object) {
-        setText("");
+    	System.out.println("StatusLabel/update");
+        setText("ERRRORRR");
     }
 }

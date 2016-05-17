@@ -31,7 +31,7 @@ public class SlotLabel extends ColoredLabel implements Observer, MouseListener {
 		this.setText(text);
 		
 	//	System.out.println(sheet.value(position));
-		currentSlot.deleteObserver(this);
+	//	currentSlot.deleteObserver(this);
 		
 	}
 
