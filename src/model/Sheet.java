@@ -25,7 +25,7 @@ public class Sheet extends Observable implements Environment {
 		//Slot value = SlotFactory.create(text) // Hitta rätt typ av slot...
 		Slot value = SlotTypeChecker.check(input);
 		if (circularCheck(key, value)) {
-			errorMessage += " at position " + key;
+			errorMessage = "ERROR";
 
 		} else {
 			sheetMap.put(key, value);
@@ -92,7 +92,7 @@ public class Sheet extends Observable implements Environment {
 		try {
 			return slot.print(this);
 		} catch (XLException e) {
-			if (errorMessage == "") errorMessage = "ERROR: Circular Dependency";
+			errorMessage = "ERROR";
 			return "ERROR";
 		}
 	}

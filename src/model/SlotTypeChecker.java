@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import expr.Expr;
 import expr.ExprParser;
+import util.XLException;
 
 public class SlotTypeChecker {
 	
@@ -20,6 +21,8 @@ public class SlotTypeChecker {
 			return new ExprSlot(newExpr);
 		} catch (IOException e) {			
 			e.printStackTrace();
+			return null;
+		} catch (XLException e) {
 			return null;
 		}
 	}
