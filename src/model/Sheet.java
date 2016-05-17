@@ -18,8 +18,13 @@ public class Sheet extends Observable implements Environment {
 	public void editSlot(String key, String input) {
 		//Slot value = SlotFactory.create(text) // Hitta rätt typ av slot...
 		Slot value = SlotTypeChecker.check(input);
-		
-		sheetMap.put(key, value);
+		if (circularCheck(key, value)) {
+			setChanged();
+			notifyObservers();
+		} else {
+			sheetMap.put(key, value);
+		}
+
 	//	sheetMap.put("A1", new TextSlot("123"));
 
 	}
@@ -43,8 +48,10 @@ public class Sheet extends Observable implements Environment {
 		}
 	}
 	
-	public boolean clearAll(){
-		return false;
+	public void clearAll(){
+		sheetMap = new HashMap<String, Slot>();
+		setChanged();
+		notifyObservers();
 		
 	}
 	
@@ -97,6 +104,5 @@ public class Sheet extends Observable implements Environment {
         sheetMap.put(key, currentSlot);
         return false;
 	}
-	
 	
 }

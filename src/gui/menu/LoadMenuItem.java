@@ -28,13 +28,11 @@ class LoadMenuItem extends OpenMenuItem {
 		} catch (FileNotFoundException e) {
 			statusLabel.setText(e.getMessage());
 		}
-		
-		try{
-			Set<Map.Entry<String, Slot>> set = xl.getData();
-		}
+
 	}
 
 	protected int openDialog(JFileChooser fileChooser) {
+		System.out.println(1);
 		return fileChooser.showOpenDialog(xl);
 	}
 }
