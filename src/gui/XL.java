@@ -4,12 +4,16 @@ import static java.awt.BorderLayout.CENTER;
 import static java.awt.BorderLayout.NORTH;
 import static java.awt.BorderLayout.SOUTH;
 import gui.menu.XLMenuBar;
+
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
+import java.util.Map;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
 import model.*;
 
 public class XL extends JFrame implements Printable {
@@ -61,5 +65,10 @@ public class XL extends JFrame implements Printable {
 
     public static void main(String[] args) {
         new XL(new XLList(), new XLCounter());
+    }
+    
+    public void loadMap(Map<String, Slot> map){
+    	sheet.
+    	
     }
 }

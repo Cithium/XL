@@ -25,7 +25,7 @@ public class Sheet extends Observable implements Environment {
 	}
 	
 	public boolean insert(SlotLabel key, Slot s){
-	
+	 
 		return true;
 	}
 	
