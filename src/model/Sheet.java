@@ -114,8 +114,8 @@ public class Sheet extends Observable implements Environment {
 
 	public boolean circularCheck(String key, Slot value) {
 		Slot currentSlot = sheetMap.get(key);
-
-		sheetMap.put(key, new TestSlot());
+		System.out.println(key + " ,  " + value.toString());
+		sheetMap.put(key, new TestSlot(value.toString()));
 
         try {
             value.value(this);
@@ -129,5 +129,10 @@ public class Sheet extends Observable implements Environment {
 
 		sheetMap.put(key, currentSlot);
 		return false;
+	}
+	
+	public String getEquation(String key) {
+		if (!sheetMap.containsKey(key)) return "";
+		return sheetMap.get(key).toString();
 	}
 }

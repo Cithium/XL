@@ -29,4 +29,5 @@ public class CurrentSlot extends Observable {
     	return currentLabel;
     }
 
+
 }

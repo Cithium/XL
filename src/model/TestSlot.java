@@ -4,9 +4,9 @@ import expr.Environment;
 import util.XLException;
 
 public class TestSlot implements Slot {
-	
-	public TestSlot() {
-		
+	String text;
+	public TestSlot(String input) {
+		text = input;
 	}
 
 	@Override
@@ -19,4 +19,8 @@ public class TestSlot implements Slot {
 		throw new XLException("Circular dependency detected");
 	}
 
+	@Override
+	public String toString() {
+		return text;
+	}
 }

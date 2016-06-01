@@ -3,12 +3,14 @@ package gui;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JTextField;
 
 import model.Sheet;
 
-public class Editor extends JTextField implements ActionListener {
+public class Editor extends JTextField implements ActionListener, Observer {	// Editor implementerar Observer för att kunna uppdatera editorfältet med CurrentSlots formel
     private Sheet sheet;
 	private CurrentSlot currentSlot;
 
@@ -17,6 +19,7 @@ public class Editor extends JTextField implements ActionListener {
         this.currentSlot = currentSlot;
         this.sheet = sheet;
         addActionListener(this);
+        currentSlot.addObserver(this);
         
     }
 
@@ -27,5 +30,12 @@ public class Editor extends JTextField implements ActionListener {
 		this.setText("");
 		currentSlot.set(currentSlot.getLabel());
 
+	}
+
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		// TODO Auto-generated method stub
+		System.out.println("Editor/update");
+		this.setText(sheet.getEquation(currentSlot.getLabel().toString()));
 	}
 }

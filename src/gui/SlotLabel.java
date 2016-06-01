@@ -13,21 +13,22 @@ public class SlotLabel extends ColoredLabel implements Observer, MouseListener {
 	
     private CurrentSlot currentSlot;
     private String position;
-    private Sheet sheet;
+    // onödigt med sheet nu, då den inte används här längre private Sheet sheet;
     
-    public SlotLabel(String position, CurrentSlot currentSlot, Sheet sheet) {
+    public SlotLabel(String position, CurrentSlot currentSlot/*, Sheet sheet*/) {
         super("                    ", Color.WHITE, RIGHT);
         addMouseListener(this);
         this.currentSlot = currentSlot;
         this.position = position;
-        this.sheet = sheet;
-        sheet.addObserver(this);
+    //    this.sheet = sheet;
+    //    sheet.addObserver(this);
     }
 
-	@Override
+	@Override		// ÄNDRAD, flyttat köttet till SlotLabels
 	public void update(Observable o, Object arg) {
-		String text = sheet.print(position);
-		this.setText(text);
+		System.out.println("SlotLabel/update");
+	//	String text = sheet.print(position);
+	//	this.setText(text);
 		
 	//	System.out.println(sheet.value(position));
 		currentSlot.deleteObserver(this);
@@ -54,6 +55,7 @@ public class SlotLabel extends ColoredLabel implements Observer, MouseListener {
 
 	@Override
 	public void mousePressed(MouseEvent arg0) {
+		System.out.println("SlotLabel/mousePressed");
 		currentSlot.reset();
 		this.setBackground(Color.YELLOW);
 		currentSlot.set(this);
